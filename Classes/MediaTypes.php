@@ -1923,7 +1923,7 @@ abstract class MediaTypes
      * @param string $rawMediaType The full media type, for example "application/json; charset=UTF-8"
      * @return string|null Just the type and subtype, for example "application/json"
      */
-    public static function trimMediaType(string $rawMediaType): ?string
+    public static function trimMediaType(string $rawMediaType)
     {
         $pieces = self::parseMediaType($rawMediaType);
         return trim(sprintf('%s/%s', $pieces['type'], $pieces['subtype']), '/') ?: null;
