@@ -21,7 +21,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data Provider
      */
-    public function filenamesAndMediaTypes()
+    public static function filenamesAndMediaTypes()
     {
         return [
             ['', 'application/octet-stream'],
@@ -48,7 +48,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data Provider
      */
-    public function filesAndMediaTypes()
+    public static function filesAndMediaTypes()
     {
         return [
             ['', 'application/octet-stream'],
@@ -71,7 +71,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data Provider
      */
-    public function mediaTypesAndFilenames()
+    public static function mediaTypesAndFilenames()
     {
         return [
             ['foo/bar', []],
@@ -103,7 +103,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data provider with media types and their parsed counterparts
      */
-    public function mediaTypesAndParsedPieces()
+    public static function mediaTypesAndParsedPieces()
     {
         return [
             ['text/html', ['type' => 'text', 'subtype' => 'html', 'parameters' => []]],
@@ -125,7 +125,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data provider
      */
-    public function mediaRangesAndMatchingOrNonMatchingMediaTypes()
+    public static function mediaRangesAndMatchingOrNonMatchingMediaTypes()
     {
         return [
             ['invalid', 'text/html', false],
@@ -155,7 +155,7 @@ class MediaTypesTest extends \PHPUnit\Framework\TestCase
     /**
      * Data provider with media types and their trimmed versions
      */
-    public function mediaTypesWithAndWithoutParameters()
+    public static function mediaTypesWithAndWithoutParameters()
     {
         return [
             ['text/html', 'text/html'],
