@@ -13,13 +13,15 @@ namespace Neos\Utility\MediaTypes\Tests\Unit;
  * information, please view the LICENSE file which was distributed with this
  * source code.
  */
-
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Neos\Utility\MediaTypes;
 
 /**
  * Testcase for the Utility Media Types class
  */
-final class MediaTypesTest extends \PHPUnit\Framework\TestCase
+final class MediaTypesTest extends TestCase
 {
     /**
      * Data Provider
@@ -37,10 +39,8 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['image.JPEG', 'image/jpeg'];
     }
 
-    /**
-     * @test
-     * @dataProvider filenamesAndMediaTypes
-     */
+    #[DataProvider('filenamesAndMediaTypes')]
+    #[Test]
     public function getMediaTypeFromFilenameMapsFilenameOrExtensionToMediaType(string $filename, string $expectedMediaType): void
     {
         self::assertSame($expectedMediaType, MediaTypes::getMediaTypeFromFilename($filename));
@@ -56,10 +56,8 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['Neos.png', 'image/png'];
     }
 
-    /**
-     * @test
-     * @dataProvider filesAndMediaTypes
-     */
+    #[DataProvider('filesAndMediaTypes')]
+    #[Test]
     public function getMediaTypeFromFileContent(string $filename, string $expectedMediaType): void
     {
         $filePath = __DIR__ . '/Fixtures/' . $filename;
@@ -78,19 +76,15 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['text/csv', ['csv']];
     }
 
-    /**
-     * @test
-     * @dataProvider mediaTypesAndFilenames
-     */
+    #[DataProvider('mediaTypesAndFilenames')]
+    #[Test]
     public function getFilenameExtensionFromMediaTypeReturnsFirstFileExtensionFoundForThatMediaType(string $mediaType, array $filenameExtensions): void
     {
         self::assertSame(($filenameExtensions === [] ? '' : $filenameExtensions[0]), MediaTypes::getFilenameExtensionFromMediaType($mediaType));
     }
 
-    /**
-     * @test
-     * @dataProvider mediaTypesAndFilenames
-     */
+    #[DataProvider('mediaTypesAndFilenames')]
+    #[Test]
     public function getFilenameExtensionsFromMediaTypeReturnsAllFileExtensionForThatMediaType(string $mediaType, array $filenameExtensions): void
     {
         self::assertSame($filenameExtensions, MediaTypes::getFilenameExtensionsFromMediaType($mediaType));
@@ -107,10 +101,8 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['application/vnd.org.flow.coffee+json; kind =Arabica;weight= 15g;  sugar =none', ['type' => 'application', 'subtype' => 'vnd.org.flow.coffee+json', 'parameters' => ['kind' => 'Arabica', 'weight' => '15g', 'sugar' => 'none']]];
     }
 
-    /**
-     * @test
-     * @dataProvider mediaTypesAndParsedPieces
-     */
+    #[DataProvider('mediaTypesAndParsedPieces')]
+    #[Test]
     public function parseMediaTypeReturnsAssociativeArrayWithIndividualPartsOfTheMediaType(string $mediaType, array $expectedPieces): void
     {
         $actualPieces = MediaTypes::parseMediaType($mediaType);
@@ -135,10 +127,8 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['-Foo.+/~Bar199', '-Foo.+/~Bar199', true];
     }
 
-    /**
-     * @test
-     * @dataProvider mediaRangesAndMatchingOrNonMatchingMediaTypes
-     */
+    #[DataProvider('mediaRangesAndMatchingOrNonMatchingMediaTypes')]
+    #[Test]
     public function mediaRangeMatchesChecksIfTheGivenMediaRangeMatchesTheGivenMediaType(string $mediaRange, string $mediaType, bool $expectedResult): void
     {
         $actualResult = MediaTypes::mediaRangeMatches($mediaRange, $mediaType);
@@ -157,10 +147,8 @@ final class MediaTypesTest extends \PHPUnit\Framework\TestCase
         yield ['invalid/', null];
     }
 
-    /**
-     * @test
-     * @dataProvider mediaTypesWithAndWithoutParameters
-     */
+    #[DataProvider('mediaTypesWithAndWithoutParameters')]
+    #[Test]
     public function trimMediaTypeReturnsJustTheTypeAndSubTypeWithoutParameters(string $mediaType, ?string $expectedResult = null): void
     {
         $actualResult = MediaTypes::trimMediaType($mediaType);
